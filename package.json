@@ -7,7 +7,7 @@
 	"email": "nickblackwell82@gmail.com",
 	"homepage": "https://github.com/nickolanack/node-ws-sharedsocket",
 	"license": "MIT",
-	{ "dependencies" :
+	"dependencies":
   		{ "ws" : "latest"}
-  	}
+  	
 }
