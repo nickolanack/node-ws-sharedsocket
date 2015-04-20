@@ -21,7 +21,14 @@
 		require('node-apache-config').getDocumentRoot(wsclient.upgradeReq.headers.host, function(path){
 			
 			console.log(path);
-			
+			var file=path+'ws.js';
+			fs.exists(file, function (exists) {
+				  if(exists){
+					  require(file).handle(wsclient);
+				  }else{
+					  wsclient.close(4000, 'file not found');
+				  }
+			});
 			
 		});
 		

@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type='text/javascript'>
 
 	// this is a test websocket script, that simply attempts to connect to 
 	// the socket server at 8089, at the current url.
@@ -6,20 +6,35 @@
 	window.addEventListener('load',function(){
 		
 		
-		var ws = new WebSocket("ws://"+window.location.hostname+":8080"+window.location.pathname);
-		console.log("started websocket: ws");
+		var timer;
+		
+		var ws = new WebSocket('ws://'+window.location.hostname+':8080'+window.location.pathname);
+		console.log('started websocket: ws');
 		ws.onopen=function(){
-			console.log("opened: ");
+			console.log('opened: ');
+			
+			var counter=50;
+			var message='Hello World';
+			var interval=setInterval(function(){
+				timer=window.performance.now();
+				ws.send(message);
+				console.log('sent message: '+message);
+				counter--;
+				if(counter==0){
+					clearInterval(interval);
+				}
+			},1000);
+			
 			
 		}
 		
 		ws.onerror=function(){
-			console.log("recieved error: ");
+			console.log('recieved error: ');
 			
 		}
 		
 		ws.onmessage=function(message){
-			console.log("recieved message: ");
+			console.log('recieved message: '+message+' '+(window.performance.now()-timer));
 		};
 		
 		
