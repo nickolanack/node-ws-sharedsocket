@@ -7,17 +7,23 @@
 	//check argv (--port) here.
 
 	var wsserver=new (require('ws').Server)({port: port});
+	var fs=require('fs');
+	
 	console.log('Websocket - Named Vhost Router, listening on port: '+port);
 	
 	wsserver.on('connection',function(wsclient){
 		
-		console.log('client:'+ Object.keys(wsclient));
 		
+		console.log(wsclient.upgradeReq);
+
+		console.log('recieved a new connection from: '+wsclient.upgradeReq.headers.host);
 		
-		console.log('Created a new connection');
-		console.log('recieved new connection from: '+wsclient.upgradeReq.headers.host);
-		
-		console.log(require('node-apache-config').getDocumentRoot(wsclient.upgradeReq.headers.host));
+		require('node-apache-config').getDocumentRoot(wsclient.upgradeReq.headers.host, function(path){
+			
+			console.log(path);
+			
+			
+		});
 		
 		
 		wsclient.on('close',function(code, message){

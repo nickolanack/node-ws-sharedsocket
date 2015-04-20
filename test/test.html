@@ -6,7 +6,7 @@
 	window.addEventListener('load',function(){
 		
 		
-		var ws = new WebSocket("ws://"+window.location.hostname+":8080");
+		var ws = new WebSocket("ws://"+window.location.hostname+":8080"+window.location.pathname);
 		console.log("started websocket: ws");
 		ws.onopen=function(){
 			console.log("opened: ");
