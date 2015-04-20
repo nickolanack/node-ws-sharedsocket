@@ -1,0 +1,28 @@
+<script type="text/javascript">
+
+	window.addEventListener('load',function(){
+		
+		
+		var ws = new WebSocket("ws://"+window.location.hostname+":8089");
+		
+		ws.onopen=function(){
+			document.write("opened: ");
+			
+		}
+		
+		ws.onerror=function(){
+			document.write("recieved error: ");
+			
+		}
+		
+		ws.onmessage=function(message){
+			
+			document.write("recieved message: ");
+			
+		};
+		
+		
+	});
+
+
+</script>
