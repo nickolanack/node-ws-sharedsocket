@@ -10,7 +10,8 @@
 	"homepage": "https://github.com/nickolanack/node-ws-sharedsocket",
 	"license": "MIT",
 	"dependencies": { 
-		"ws": "latest"
+		"ws": "latest",
+		
 	},
 	"main": "./ws-server.js"
   	
