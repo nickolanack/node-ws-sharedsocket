@@ -1,9 +1,17 @@
 { 
 	"name": "ws-sharedsocket",
-	"description": 		
-"a websocket server that acts as a gateway for multiple websocket applications. Providing a single shared url and port, similar to vhosts",
-
-"keywords":["websocket","router", "named virtual host websockets"],
+	"description":"a websocket server that acts as a gateway for multiple websocket applications. Providing a single shared url and port, similar to vhosts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nickolanack/node-apache-config.git"
+	},
+	"author": {
+		"name": "NicK Blackwell"
+	},
+	"keywords":["websocket","router", "named virtual host websockets"],
 	"version": "1.0.0",
 	"url": "https://github.com/nickolanack/node-ws-sharedsocket/issues",
 	"email": "nickblackwell82@gmail.com",
@@ -15,5 +23,4 @@
 
 	},
 	"main": "./ws-server.js"
-  	
 }
