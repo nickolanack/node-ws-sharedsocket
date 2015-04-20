@@ -7,8 +7,10 @@
 		
 		
 		var timer;
+		var pathname=window.location.pathname.split('/').slice(0,-1).join('/')+'/ws.js';
+	
 		
-		var ws = new WebSocket('ws://'+window.location.hostname+':8080'+window.location.pathname);
+		var ws = new WebSocket('ws://'+window.location.hostname+':8080'+pathname);
 		console.log('started websocket: ws');
 		ws.onopen=function(){
 			console.log('opened: ');
