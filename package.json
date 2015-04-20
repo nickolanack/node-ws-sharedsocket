@@ -1,8 +1,9 @@
 { 
 	"name": "ws-sharedsocket",
-	"description": "a websocket server that acts as a gateway for multiple websocket applications." +
-			" Providing a single shared url and port, similar to vhosts",
-	"keywords":["websocket","router", "named virtual host websockets"],
+	"description": 		
+"a websocket server that acts as a gateway for multiple websocket applications. Providing a single shared url and port, similar to vhosts",
+
+"keywords":["websocket","router", "named virtual host websockets"],
 	"version": "1.0.0",
 	"url": "https://github.com/nickolanack/node-ws-sharedsocket/issues",
 	"email": "nickblackwell82@gmail.com",
@@ -10,6 +11,7 @@
 	"license": "MIT",
 	"dependencies": { 
 		"ws": "latest"
-	}
+	},
+	"main": "./ws-server.js"
   	
 }
