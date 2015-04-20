@@ -11,7 +11,8 @@
 	"license": "MIT",
 	"dependencies": { 
 		"ws": "latest",
-		
+		"node-apache-config":"git://github.com/nickolanack/node-apache-config.git#master"
+
 	},
 	"main": "./ws-server.js"
   	
