@@ -1,4 +1,17 @@
 /**
+ * WebSocket Shared Socket Server.
+ * 
+ * listens for sebsocket connections on port 8080, uses the current vhost configuration (apache/httpd) 
+ * to route each socket connection to an appropriate handler. this script expects handlers to be named ws, 
+ * and have the form: 
+ * 
+ * ws.js > 
+ * module.exports={	
+ * 		handle:function(wsocket, options){
+ *			// add event handlers to ws. see https://github.com/websockets/ws
+ *		}
+ *		
+ * };
  * 
  */
 
@@ -14,8 +27,7 @@
 	wsserver.on('connection',function(wsclient){
 		
 		
-		console.log(wsclient.upgradeReq);
-
+		//console.log('connection: '+wsclient.upgradeReq);
 		console.log('recieved a new connection from: '+wsclient.upgradeReq.headers.host);
 		
 		require('node-apache-config').getDocumentRoot(wsclient.upgradeReq.headers.host, function(path){
@@ -26,12 +38,25 @@
 			fs.exists(path, function (exists) {
 				  if(exists){
 					  
+					  urlvars=pathname.split('?');
+					  var urlopts={};
+					  pathname=urlvars[0];
+					  if(urlvars.length>1){
+						  urlvars=urlvars.slice(1).join('?');
+						  
+						  urlvars=urlvars.split('=');
+						  for(var i=0;i<urlvars.length;i+=2){
+							  urlopts[urlvars[i]]=urlvars[i+1];
+						  }
+					  }
+					
+					  
 					  if(pathname==='/'||pathname===''){
 						  var defaultApp=path+'ws.js';
 						  fs.exists(defaultApp, function (exists) {
 							  if(exists){
 								  console.log('Creating Default App: '+defaultApp)
-								  require(defaultApp).handle(wsclient);
+								  require(defaultApp).handle(wsclient, urlopts);
 							  }else{
 								  wsclient.close(4000, 'Default app does not exist');
 							  }
@@ -43,7 +68,7 @@
 							  fs.exists(app, function (exists) {
 								  if(exists){
 									  console.log('Creating App: '+app)
-									  require(app).handle(wsclient);
+									  require(app).handle(wsclient, urlopts);
 								  }else{
 									  wsclient.close(4000, 'Default app does not exist');
 								  }
@@ -52,10 +77,6 @@
 							  wsclient.close(4000, 'Invalid url to websocket app:'+pathname);
 						  }
 					  }
-					  
-					  
-					
-					  
 					  
 					  
 				  }else{
